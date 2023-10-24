@@ -13,6 +13,8 @@ public class PlayerM : MonoBehaviour
     public int lives;
     public float speed;
 
+    bool direction = false; // false = left, true = right
+
     private void Start()
     {
         speed = 0.1f;
@@ -37,11 +39,13 @@ public class PlayerM : MonoBehaviour
         {
             moveX = moveX - 1;
             sPlayer.flipX = true;
+            direction = false;
         }
         if (Input.GetKey(KeyCode.D))
         {
             moveX = moveX + 1;
             sPlayer.flipX = false;
+            direction = true;
         }
 
         transform.Translate(new Vector3(moveX, moveZ, 0) * speed);
@@ -56,5 +60,10 @@ public class PlayerM : MonoBehaviour
     {
         int life;
         return life = this.lives;
+    }
+
+    public bool getDirection()
+    {
+        return direction;
     }
 }

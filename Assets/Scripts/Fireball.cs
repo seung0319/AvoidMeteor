@@ -10,7 +10,7 @@ public class Fireball : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Destroy(gameObject, 3.0f);
+        //Destroy(gameObject, 3.0f);
         p = GameObject.Find("Player").GetComponent<PlayerM>();
         speed = -0.15f;
     }
@@ -31,7 +31,7 @@ public class Fireball : MonoBehaviour
         */
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.name == "Player")
         {
@@ -40,7 +40,7 @@ public class Fireball : MonoBehaviour
             //Boom을 해당 스크립트를 끼고 있는 오브젝트의 위치에 생성합니다.
             //회전 값은 없습니다.
             Destroy(gameObject);
-            if(p.getPlayerLives() == 0)
+            if (p.getPlayerLives() == 0)
             {
 
             }
@@ -49,9 +49,32 @@ public class Fireball : MonoBehaviour
 
         }
 
-        if (collision.gameObject.name == "BoundaryL" || collision.gameObject.name == "BoundaryB")
+        if (collision.gameObject.name == "BoundaryB")
         {
             Destroy(gameObject);
         }
     }
+    //private void OnCollisionEnter2D(Collision2D collision)
+    //{
+    //    if (collision.gameObject.name == "Player")
+    //    {
+    //        Debug.Log("fireball");
+    //        Instantiate(Boom, transform.position, Quaternion.identity);
+    //        //Boom을 해당 스크립트를 끼고 있는 오브젝트의 위치에 생성합니다.
+    //        //회전 값은 없습니다.
+    //        Destroy(gameObject);
+    //        if(p.getPlayerLives() == 0)
+    //        {
+
+    //        }
+    //        else
+    //            p.losePlayerLives();
+
+    //    }
+
+    //    if (collision.gameObject.name == "BoundaryL" || collision.gameObject.name == "BoundaryB")
+    //    {
+    //        Destroy(gameObject);
+    //    }
+    //}
 }
