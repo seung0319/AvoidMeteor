@@ -12,11 +12,21 @@ public class PlayerM : MonoBehaviour
     public GameObject Boom;
     public int lives;
     public float speed;
+    public float moveableRangex = 8.5f;
+    public float moveableRangey = 4.5f;
+    GameObject hpUp;
+    GameObject bombUp;
+    bool hpAct = false;
+    bool bombAct = false;
 
     bool direction = false; // false = left, true = right
 
     private void Start()
     {
+        hpUp = GameObject.Find("hpUP");
+        bombUp = GameObject.Find("bombUP");
+        hpUp.SetActive(false);
+        bombUp.SetActive(false);
         speed = 0.1f;
         lives = 5;
     }
@@ -47,8 +57,19 @@ public class PlayerM : MonoBehaviour
             sPlayer.flipX = false;
             direction = true;
         }
-
+        
         transform.Translate(new Vector3(moveX, moveZ, 0) * speed);
+        hpUp.transform.position = transform.position + new Vector3(0, 1f, 0);
+        bombUp.transform.position = transform.position + new Vector3(0, 1f, 0);
+        transform.position = new Vector2(Mathf.Clamp(transform.position.x, -moveableRangex, moveableRangex), Mathf.Clamp(transform.position.y, -moveableRangey, moveableRangey));
+        if(hpAct == true)
+        {
+            hpUp.SetActive(true);
+        }
+        if(bombAct == true)
+        {
+            bombUp.SetActive(true);
+        }
     }
 
     public void losePlayerLives()
@@ -56,6 +77,12 @@ public class PlayerM : MonoBehaviour
         this.lives -= 1;
     }
 
+    public void upPlayerLives()
+    {
+        this.lives += 1;
+        hpAct = true;
+        //hpUp.SetActive(false);
+    }
     public int getPlayerLives()
     {
         int life;

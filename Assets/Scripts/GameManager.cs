@@ -19,8 +19,7 @@ public class GameManager : MonoBehaviour
     int mPhase = 1;
 
     public GameObject fireball;
-    public GameObject bomb;
-    public GameObject heart;
+    public GameObject additionalObject  ;
 
     TextMeshProUGUI phasetext;
     TextMeshProUGUI lives;
@@ -99,8 +98,9 @@ public class GameManager : MonoBehaviour
         {
             mTotalTime = 0;
             mPhase++;
-            phasetext.text = "Phase Up!! ก่";
-            createItem();
+            phasetext.text = "Phase Up!!";
+            if(mPhase%3 == 0)
+                createItem();
         }
         if (mTotalTime >= 2f)
         {
@@ -141,13 +141,10 @@ public class GameManager : MonoBehaviour
 
     private void createItem()
     {
-        float x = Random.Range(-8.5f, 8.5f);
+        float x = Random.Range(-8.0f, 8.0f);
         float y = 5.0f;
-        int rand = Random.Range(0, 2);
-        if (rand == 0)
-            createObject(bomb, new Vector3(x, y, 0), Quaternion.Euler(0, 0, 0));
-        else
-            createObject(heart, new Vector3(x, y, 0), Quaternion.Euler(0, 0, 0));
+
+        createObject(additionalObject, new Vector3(x, y, 0), Quaternion.Euler(0, 0, -90));
     }
 
     public void Menu()

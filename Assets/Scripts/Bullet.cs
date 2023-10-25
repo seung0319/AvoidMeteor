@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    public GameObject BombEffect;
+    public GameObject[] items;
 
     private void Start()
     {
@@ -12,14 +12,14 @@ public class Bullet : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Enemy")
+        if (collision.gameObject.tag == "Item")
         {
-            Debug.Log("2");
+            int rand = Random.Range(0, items.Length);
             Destroy(gameObject);
             Destroy(collision.gameObject);
-            Instantiate(BombEffect, new Vector2(transform.position.x, transform.position.y + 0.5f), Quaternion.identity);
+            Instantiate(items[rand], new Vector2(transform.position.x, transform.position.y), Quaternion.identity);
         }
-        if (collision.gameObject.tag == "Wall")
+        if (collision.gameObject.tag == "Top")
         {
             Destroy(gameObject);
         }

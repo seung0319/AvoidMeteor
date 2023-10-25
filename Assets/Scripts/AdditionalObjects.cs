@@ -10,7 +10,7 @@ public class AdditionalObjects : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        speed = -0.075f;
+        speed = -0.05f;
     }
 
     void FixedUpdate()
@@ -30,6 +30,9 @@ public class AdditionalObjects : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-
+        if (collision.gameObject.tag == "Wall")
+        {
+            Destroy(gameObject);
+        }
     }
 }
